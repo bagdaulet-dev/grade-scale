@@ -9,6 +9,10 @@ COPY src src
 RUN --mount=type=cache,target=/root/.m2 ./mvnw -B -ntp -DskipTests -Daether.connector.connectTimeout=15000 -Daether.connector.requestTimeout=30000 package
 
 FROM eclipse-temurin:21-jre-jammy
+LABEL org.opencontainers.image.title="Grade_scale" \
+      org.opencontainers.image.description="Weighted course grades with private browser workspaces" \
+      org.opencontainers.image.source="https://github.com/bagdaulet-dev/grade-scale" \
+      org.opencontainers.image.version="0.1.0"
 RUN groupadd --gid 10001 app && useradd --uid 10001 --gid app --no-create-home app
 WORKDIR /app
 COPY --from=build --chown=app:app /build/target/grade-scale.jar app.jar
