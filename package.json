@@ -4,12 +4,13 @@
   "private": true,
   "description": "Development-only formatting and browser checks for Grade_scale",
   "scripts": {
-    "format": "prettier --write src/main/resources/static/*.{html,css,js} docs/*.md README.md package.json scripts/*.mjs .github/workflows/*.yml",
-    "format:check": "prettier --check src/main/resources/static/*.{html,css,js} docs/*.md README.md package.json scripts/*.mjs .github/workflows/*.yml",
+    "format": "prettier --write . --ignore-path .gitignore",
+    "format:check": "prettier --check . --ignore-path .gitignore",
     "test:browser": "node scripts/browser-smoke.mjs"
   },
   "devDependencies": {
     "playwright": "1.62.1",
     "prettier": "3.9.10"
-  }
+  },
+  "type": "module"
 }
