@@ -1,5 +1,7 @@
 # Grade_scale
 
+[![CI](https://github.com/bagdaulet-dev/grade-scale/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/bagdaulet-dev/grade-scale/actions/workflows/ci.yml)
+
 A Java REST API and a visual workspace for weighted course grades. Create a
 course, add assessment scores and weights, and see your current average, earned
 points, and remaining work. Results are provisional until weights reach 100%.
@@ -60,6 +62,8 @@ sessions, so a valid session can resume after restarting the app.
 - Enter percentage scores and weights with up to two decimal places.
 - See weighted contributions and a proportional weight bar.
 - Get a final-score target for the remaining course weight.
+- Export a course and its results as JSON, without session credentials.
+- Keep the selected course open across page reloads.
 - Read the grading scale and API guide inside the app.
 - Keep courses private to the browser session, with CSRF protection on changes.
 
@@ -95,7 +99,7 @@ This is a reference scale, not a claim about any school's grading policy.
 
 Java 21-compatible source, Spring Boot 4.1.2, Spring Web MVC, Spring Security,
 Spring JDBC `JdbcTemplate`, MySQL, and TestNG. A documented initial SQL schema
-keeps this small project simple. There is no JUnit, Flyway, or ORM layer.
+keeps this small project simple. The SQL schema and queries remain explicit.
 
 ```text
 src/main/java/dev/bagdaulet/gradescale/
@@ -142,12 +146,22 @@ To run the API tests against an existing MySQL instance, provide `MYSQL_HOST`,
 
 ## CI and delivery
 
-The CI workflow is ready for a future repository: it tests Java against MySQL,
-checks frontend formatting and dependencies, runs a browser journey, and builds
-the Docker image. A separate manual workflow exports an image artifact.
-It does not publish an image or deploy to a server automatically.
+[GitHub repository](https://github.com/bagdaulet-dev/grade-scale).
 
-No GitHub repository or remote is configured for this local project.
+CI verifies both preview and MySQL persistence implementations, generates combined
+JaCoCo coverage, checks dependencies and API-contract references, runs the browser
+journey, and builds the container. After a successful push to `main`, it publishes
+an immutable commit-tagged image to `ghcr.io/bagdaulet-dev/grade-scale`.
+A separate manual workflow exports an image artifact. Server deployment is configured
+separately; see [deployment](docs/deployment.md).
+
+Developer shortcuts: `./scripts/check.sh`, `python3 scripts/check-openapi.py`, and
+`python3 scripts/audit-maven.py`. The last command checks public Maven package names
+and versions against OSV; it does not send source code or application data.
 
 [API](docs/api.md) · [Architecture](docs/architecture.md) ·
 [Security](docs/security.md) · [Verification](docs/verification.md)
+
+[OpenAPI 3.1](docs/openapi.json) · [HTTP examples](examples/README.md) ·
+[Grading details](docs/grading.md) · [Contributing](CONTRIBUTING.md) ·
+[Security reports](SECURITY.md)
