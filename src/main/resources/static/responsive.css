@@ -1,0 +1,739 @@
+/* Responsive breakpoints and reduced-motion behavior. */
+@media (min-width: 1600px) {
+  .workspace {
+    padding: 0 65px;
+  }
+  .page-heading {
+    padding-top: 45px;
+    padding-bottom: 35px;
+  }
+  .assessment-table td {
+    padding: 25px 0;
+  }
+  .result-panel {
+    padding: 25px 32px 22px;
+  }
+  .grade-instrument {
+    max-width: 350px;
+  }
+  .grade-letter {
+    font-size: 115px;
+  }
+}
+@media (max-width: 1190px) {
+  .app-shell {
+    grid-template-columns: 205px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding: 28px 15px 20px;
+  }
+  .brand > span:last-child {
+    font-size: 21px;
+  }
+  .brand small {
+    font-size: 8px;
+  }
+  .workspace {
+    padding: 0 27px;
+  }
+  .main-grid,
+  .lower-grid {
+    gap: 18px;
+    grid-template-columns: minmax(0, 1.4fr) minmax(270px, 1fr);
+  }
+  .assessment-panel {
+    padding: 22px 16px 0;
+  }
+  .formula-note {
+    margin-left: -16px;
+    margin-right: -16px;
+    padding: 15px;
+  }
+  .section-heading h3 {
+    font-size: 17px;
+  }
+  .section-heading p {
+    font-size: 10px;
+  }
+  .assessment-table th:first-child {
+    width: 43%;
+  }
+  .assessment-table th:last-child {
+    width: 20%;
+  }
+  .assessment-table th:nth-child(2) {
+    width: 19%;
+  }
+  .assessment-table th:nth-child(3) {
+    width: 18%;
+  }
+  .assessment-name {
+    gap: 6px;
+    font-size: 11px;
+  }
+  .assessment-marker {
+    width: 22px;
+    height: 26px;
+  }
+  .result-panel {
+    padding: 22px 18px 17px;
+  }
+  .target-panel {
+    padding: 20px 16px;
+  }
+  .target-copy {
+    gap: 9px;
+  }
+  .target-copy h3 {
+    font-size: 14px;
+  }
+  .target-copy p {
+    font-size: 9px;
+  }
+  .target-form {
+    gap: 7px;
+  }
+  .page-heading h1 {
+    font-size: 29px;
+  }
+}
+@media (max-width: 960px) {
+  .app-shell {
+    grid-template-columns: 180px minmax(0, 1fr);
+  }
+  .sidebar {
+    padding: 28px 12px;
+  }
+  .brand {
+    gap: 7px;
+  }
+  .brand-mark {
+    width: 24px;
+  }
+  .brand > span:last-child {
+    font-size: 19px;
+  }
+  .brand small {
+    font-size: 7px;
+  }
+  .nav-link {
+    font-size: 11px;
+    gap: 9px;
+    padding: 12px;
+  }
+  .semester-label {
+    font-size: 9px;
+    margin-left: 10px;
+  }
+  .sidebar-bottom {
+    padding: 20px 10px 0;
+  }
+  .sidebar-bottom strong {
+    font-size: 12px;
+  }
+  .workspace {
+    padding: 0 25px;
+  }
+  .main-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .result-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 25px;
+    gap: 10px 25px;
+    align-items: center;
+  }
+  .result-heading {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+    flex-wrap: wrap;
+  }
+  .grade-instrument {
+    grid-column: 2;
+    grid-row: 1/4;
+    width: 220px;
+    margin: 0;
+    justify-self: center;
+  }
+  .grade-letter {
+    font-size: 78px;
+  }
+  .grade-score strong {
+    font-size: 23px;
+  }
+  .result-footer {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: center;
+  }
+  .provisional-note {
+    grid-column: 1;
+    grid-row: 3;
+    align-self: start;
+  }
+  .lower-grid {
+    grid-template-columns: 1fr;
+  }
+  .scale-panel {
+    padding: 8px 0;
+  }
+  .scale-bands {
+    margin-top: 12px;
+  }
+  .scale-bands > span {
+    padding: 8px;
+  }
+  .page-heading {
+    align-items: flex-start;
+  }
+  .page-heading h1 {
+    font-size: 29px;
+    max-width: 320px;
+  }
+  .page-heading > .button {
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+  .page-description {
+    font-size: 11px;
+  }
+  .course-heading h2 {
+    font-size: 21px;
+  }
+  .workspace-tag {
+    font-size: 10px;
+  }
+  .main-footer {
+    font-size: 8px;
+  }
+  .course-actions .button {
+    font-size: 10px;
+  }
+  .course-symbol {
+    height: 40px;
+    width: 36px;
+  }
+  .section-heading {
+    margin-bottom: 24px;
+  }
+  .assessment-table td {
+    padding: 19px 0;
+  }
+  .assessment-name {
+    font-size: 12px;
+  }
+  .assessment-table th:first-child {
+    width: 50%;
+  }
+  .assessment-table th:nth-child(2) {
+    width: 17%;
+  }
+  .assessment-table th:nth-child(3) {
+    width: 17%;
+  }
+  .assessment-table th:last-child {
+    width: 16%;
+  }
+}
+@media (max-width: 700px) {
+  .app-shell {
+    display: block;
+  }
+  .sidebar {
+    position: relative;
+    top: auto;
+    height: auto;
+    min-height: 0;
+    padding: 20px 22px 0;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    border-right: 0;
+    border-bottom: 1px solid #e1d5e9;
+  }
+  .brand > span:last-child {
+    font-size: 23px;
+  }
+  .brand small {
+    display: none;
+  }
+  .brand-mark {
+    height: 31px;
+    width: 25px;
+  }
+  .semester-label,
+  .sidebar-bottom,
+  .course-nav-heading {
+    display: none;
+  }
+  .primary-nav {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+  .primary-nav .nav-link {
+    font-size: 0;
+    gap: 0;
+    padding: 10px;
+  }
+  .primary-nav .nav-link .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .nav-count {
+    display: none;
+  }
+  .course-nav {
+    grid-column: 1/-1;
+    display: flex;
+    gap: 6px;
+    margin-top: 17px;
+    max-height: none;
+    overflow-x: auto;
+    padding-bottom: 12px;
+  }
+  .course-nav-item {
+    padding: 7px 11px;
+    font-size: 10px;
+    flex-shrink: 0;
+    max-width: 180px;
+  }
+  .sidebar-hint {
+    font-size: 10px;
+    margin: 0;
+  }
+  .workspace {
+    padding: 0 22px;
+  }
+  .topbar {
+    height: 54px;
+    font-size: 9px;
+  }
+  .breadcrumb {
+    gap: 8px;
+  }
+  .breadcrumb strong {
+    max-width: 180px;
+  }
+  .workspace-tag {
+    display: none;
+  }
+  .page-heading {
+    padding: 27px 0 22px;
+    gap: 12px;
+  }
+  .greeting {
+    font-size: 9px;
+    margin-bottom: 9px;
+  }
+  .page-heading h1 {
+    font-size: 30px;
+    max-width: 250px;
+    letter-spacing: -1px;
+  }
+  .page-description {
+    font-size: 10px;
+    max-width: 225px;
+    line-height: 1.8;
+    margin-top: 11px;
+  }
+  .page-heading > .button {
+    margin-top: 24px;
+    padding: 10px;
+    font-size: 10px;
+    gap: 5px;
+  }
+  .page-heading > .button .icon {
+    width: 13px;
+    height: 13px;
+  }
+  .preview-note {
+    font-size: 9px;
+    padding-bottom: 17px;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .preview-bullet {
+    margin-top: 5px;
+  }
+  .course-heading {
+    padding: 21px 0 18px;
+    align-items: start;
+  }
+  .course-identity {
+    gap: 10px;
+  }
+  .course-symbol {
+    width: 34px;
+    height: 38px;
+    border-radius: 8px;
+  }
+  .course-symbol .icon {
+    width: 18px;
+  }
+  .course-heading h2 {
+    font-size: 21px;
+    line-height: 1.25;
+    max-width: 220px;
+  }
+  .course-code {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+  .course-actions {
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .course-actions .button {
+    font-size: 0;
+    padding: 7px;
+  }
+  .course-actions .button .icon {
+    width: 14px;
+    height: 14px;
+  }
+  .course-actions .icon-button {
+    width: 27px;
+    height: 30px;
+  }
+  .course-actions .icon-button .icon {
+    width: 14px;
+    height: 14px;
+  }
+  .main-grid {
+    gap: 20px;
+  }
+  .assessment-panel {
+    padding: 22px 17px 0;
+    border-radius: 13px;
+  }
+  .section-heading h3 {
+    font-size: 18px;
+  }
+  .section-heading p {
+    font-size: 10px;
+  }
+  .count-label {
+    font-size: 8px;
+    padding: 4px 6px;
+  }
+  .section-heading {
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .assessment-table th {
+    font-size: 9px;
+  }
+  .assessment-table th:first-child {
+    width: 45%;
+  }
+  .assessment-table th:nth-child(2) {
+    width: 17%;
+  }
+  .assessment-table th:nth-child(3) {
+    width: 18%;
+  }
+  .assessment-table th:last-child {
+    width: 20%;
+  }
+  .assessment-marker {
+    display: none;
+  }
+  .assessment-table td {
+    padding: 18px 0;
+  }
+  .assessment-name {
+    font-size: 11px;
+    padding-right: 7px;
+  }
+  .score-value {
+    font-size: 13px;
+  }
+  .weight-value {
+    font-size: 9px;
+    padding: 4px 6px;
+  }
+  .row-actions {
+    gap: 0;
+  }
+  .row-actions .icon-button {
+    width: 25px;
+  }
+  .row-actions .icon {
+    width: 12px;
+    height: 12px;
+  }
+  .add-assessment {
+    font-size: 10px;
+    margin-bottom: 24px;
+    padding: 12px 10px;
+  }
+  .weight-summary-heading {
+    font-size: 9px;
+  }
+  .weight-legend {
+    font-size: 8px;
+  }
+  .formula-note {
+    margin-left: -17px;
+    margin-right: -17px;
+    padding: 14px 17px;
+  }
+  .formula-note p {
+    font-size: 8px;
+  }
+  .result-panel {
+    display: block;
+    padding: 23px;
+    border-radius: 18px;
+  }
+  .result-heading {
+    flex-wrap: nowrap;
+  }
+  .result-heading h3 {
+    font-size: 12px;
+  }
+  .result-status {
+    font-size: 9px;
+  }
+  .grade-instrument {
+    width: 100%;
+    max-width: 300px;
+    margin: 8px auto 0;
+  }
+  .grade-letter {
+    font-size: 106px;
+  }
+  .grade-score strong {
+    font-size: 27px;
+  }
+  .grade-center > span:last-child {
+    font-size: 9px;
+  }
+  .result-footer {
+    padding: 18px 0 14px;
+  }
+  .result-footer > div > span {
+    font-size: 10px;
+  }
+  .result-footer strong {
+    font-size: 24px;
+  }
+  .provisional-note {
+    font-size: 9px;
+  }
+  .lower-grid {
+    gap: 15px;
+    margin-top: 20px;
+  }
+  .target-panel {
+    padding: 22px 19px;
+  }
+  .target-copy h3 {
+    font-size: 16px;
+  }
+  .target-copy p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .target-form {
+    margin-top: 22px;
+    gap: 8px;
+  }
+  .target-form label {
+    font-size: 10px;
+  }
+  .target-input-group {
+    padding: 8px;
+  }
+  .button-dark {
+    font-size: 10px;
+    padding: 10px 12px;
+  }
+  .scale-panel {
+    padding: 12px 0;
+  }
+  .scale-panel h3 {
+    font-size: 16px;
+  }
+  .scale-bands {
+    margin-top: 15px;
+  }
+  .scale-bands > span {
+    padding: 11px;
+  }
+  .scale-bands small {
+    font-size: 9px;
+  }
+  .scale-panel > p {
+    font-size: 9px;
+  }
+  .main-footer {
+    margin-top: 13px;
+    flex-direction: column;
+    gap: 8px;
+    padding: 20px 0;
+    font-size: 9px;
+  }
+  .empty-state {
+    padding: 40px 0;
+  }
+  .empty-illustration {
+    transform: scale(0.85) rotate(-8deg);
+    margin-bottom: 10px;
+  }
+  .empty-state h2 {
+    font-size: 27px;
+  }
+  .empty-state > p {
+    font-size: 12px;
+  }
+  .empty-actions {
+    gap: 7px;
+  }
+  .empty-actions .button {
+    font-size: 11px;
+    padding: 12px;
+  }
+  .form-dialog,
+  .info-dialog {
+    padding: 25px;
+  }
+  .dialog-heading h2 {
+    font-size: 25px;
+  }
+  .confirm-actions .button {
+    font-size: 11px;
+  }
+  .toast {
+    font-size: 11px;
+    bottom: 18px;
+    white-space: nowrap;
+  }
+}
+@media (max-width: 359px) {
+  .workspace {
+    padding: 0 16px;
+  }
+  .sidebar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .page-heading h1 {
+    font-size: 27px;
+  }
+  .page-heading > .button {
+    font-size: 9px;
+    padding: 9px;
+  }
+  .course-heading h2 {
+    font-size: 19px;
+  }
+  .assessment-panel {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
+  .formula-note {
+    margin-left: -13px;
+    margin-right: -13px;
+  }
+  .section-heading h3 {
+    font-size: 16px;
+  }
+  .count-label {
+    font-size: 7px;
+  }
+  .target-panel {
+    padding: 20px 15px;
+  }
+  .target-copy h3 {
+    font-size: 15px;
+  }
+  .target-form {
+    gap: 6px;
+  }
+  .button-dark {
+    padding: 10px;
+  }
+  .assessment-table th:first-child {
+    width: 42%;
+  }
+  .assessment-table th:last-child {
+    width: 23%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.target-input-group:focus-within {
+  outline: 3px solid #9973ae;
+  outline-offset: 3px;
+}
+.form-dialog,
+.info-dialog {
+  overscroll-behavior: contain;
+}
+.assessment-table td {
+  font-variant-numeric: tabular-nums;
+}
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+.skip-link {
+  position: absolute;
+  top: 0;
+  transform: translateY(-150%);
+}
+.skip-link:focus {
+  top: 12px;
+  transform: translateY(0);
+}
+
+/* Eleven grade bands read as a compact spectrum on desktop and mobile. */
+.scale-bands {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 5px;
+}
+.scale-bands > span {
+  padding: 7px 3px;
+  background: #dfe8db;
+}
+.scale-bands > span:nth-child(-n + 3) {
+  background: #f2e3e8;
+}
+.scale-bands > span:nth-child(n + 4):nth-child(-n + 6) {
+  background: #f3e9d5;
+}
+.scale-bands > span:nth-child(n + 7):nth-child(-n + 9) {
+  background: #e5e7d3;
+}
+.scale-bands > span:nth-child(n + 10) {
+  background: #d8e6da;
+}
+.scale-bands b {
+  font-size: 13px;
+}
+.scale-bands small {
+  font-size: 8px;
+}
+.grade-letter {
+  font-size: clamp(64px, 6.4vw, 96px);
+  letter-spacing: -5px;
+}
+@media (max-width: 700px) {
+  .grade-letter {
+    font-size: 92px;
+    letter-spacing: -4px;
+  }
+}
