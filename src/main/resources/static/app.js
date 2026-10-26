@@ -1,4 +1,4 @@
-"use strict";
+import { downloadCourse } from "./export.js";
 const $ = (selector) => document.querySelector(selector);
 const state = {
   courses: [],
@@ -108,7 +108,10 @@ async function action(work, errorNode = $("#app-error")) {
     state.busy = false;
   }
 }
-async function refresh(selectedId = state.detail?.course.id) {
+async function refresh(
+  selectedId = state.detail?.course.id ||
+    new URL(window.location.href).searchParams.get("course"),
+) {
   const refreshId = ++state.refreshId;
   const page = await api("/courses");
   if (refreshId !== state.refreshId) return;
@@ -119,6 +122,10 @@ async function refresh(selectedId = state.detail?.course.id) {
   const detail = id ? await api(`/courses/${id}`) : null;
   if (refreshId !== state.refreshId) return;
   state.detail = detail;
+  const url = new URL(window.location.href);
+  if (id) url.searchParams.set("course", id);
+  else url.searchParams.delete("course");
+  window.history.replaceState(null, "", url);
   render();
 }
 function render() {
@@ -370,6 +377,11 @@ function info(kind) {
 ["#new-course", "#new-course-side", "#first-course"].forEach((selector) =>
   $(selector).addEventListener("click", () => courseDialog()),
 );
+$("#export-course").addEventListener("click", () => {
+  if (!state.detail) return;
+  downloadCourse(state.detail, state.scale);
+  notify("Course exported.");
+});
 $("#rename-course").addEventListener("click", () => courseDialog(true));
 $("#delete-course").addEventListener("click", () =>
   confirmDelete("course", state.detail.course),
