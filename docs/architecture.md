@@ -37,3 +37,21 @@ Spring static resources, so cookies and API calls remain on the same origin.
 The database connection implementation deliberately avoids an additional connection
 pool. This is suitable for a small local learning project. A higher-traffic service
 should configure a bounded pool and shared rate limiting before scaling.
+
+## Persistence relationships
+
+```mermaid
+erDiagram
+    WORKSPACES ||--o{ COURSES : owns
+    COURSES ||--o{ ASSESSMENTS : contains
+    SPRING_SESSION ||--o{ SPRING_SESSION_ATTRIBUTES : stores
+```
+
+The session identifier is hashed to select a workspace; it is not exposed in course
+responses. Domain records and sessions have separate expiry cleanup. Foreign keys
+cascade course/assessment deletion when a workspace expires.
+
+The frontend stylesheet is organized into foundation/dialog, workspace, and
+responsive files. A small export module handles local JSON downloads. Active course
+selection is recorded as a resource ID in the URL; possession of the URL never
+bypasses server-side ownership.
