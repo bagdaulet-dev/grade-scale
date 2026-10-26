@@ -42,3 +42,15 @@ there is no account recovery, and rate limiting is process-local. It is suitable
 for learning and a portfolio demonstration; operating a multi-user student records
 service would require different authentication, retention, availability and privacy
 decisions.
+
+## Registry access
+
+The image includes OCI source labels linking it to this repository. A first GHCR
+publication may be private even for a public code repository. To allow anonymous
+pulls, the owner can choose Public in the package's visibility settings; otherwise
+a consumer must authenticate Docker with permission to read that package. Never
+store a registry token in this repository. See [GitHub's package visibility guide](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility).
+
+Use the exact commit tag shown by a successful workflow. The container publication
+job runs only after verification succeeds on a main-branch push. It has package-write
+permission; the verification job retains read-only repository access.
