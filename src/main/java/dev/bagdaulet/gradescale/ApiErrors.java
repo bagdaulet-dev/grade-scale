@@ -32,7 +32,7 @@ public class ApiErrors {
     return error(
         422,
         "VALIDATION_ERROR",
-        "Check the form: names are required; scores must be 0–100 and weights above 0–100, with at most two decimal places.");
+        "Check the form: names are required; scores must be 0–100 and weights greater than 0 and at most 100, with at most two decimal places.");
   }
 
   @ExceptionHandler({
@@ -50,13 +50,36 @@ public class ApiErrors {
   }
 
   @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-  public ResponseEntity<?> method(Exception e) {
-    return error(405, "METHOD_NOT_ALLOWED", "This request method is not supported.");
+  public ResponseEntity<?> method(HttpRequestMethodNotSupportedException e) {
+    return ResponseEntity.status(405)
+        .headers(e.getHeaders())
+        .body(
+            Map.of(
+                "error",
+                Map.of(
+                    "code",
+                    "METHOD_NOT_ALLOWED",
+                    "message",
+                    "This request method is not supported.")));
   }
 
   @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
   public ResponseEntity<?> media(Exception e) {
     return error(415, "UNSUPPORTED_MEDIA_TYPE", "Send the request as application/json.");
+  }
+
+  @ExceptionHandler(org.springframework.web.HttpMediaTypeNotAcceptableException.class)
+  public ResponseEntity<?> representation(Exception e) {
+    return ResponseEntity.status(406)
+        .contentType(org.springframework.http.MediaType.APPLICATION_JSON)
+        .body(
+            Map.of(
+                "error",
+                Map.of(
+                    "code",
+                    "NOT_ACCEPTABLE",
+                    "message",
+                    "Request a JSON response with Accept: application/json.")));
   }
 
   @ExceptionHandler(Exception.class)
