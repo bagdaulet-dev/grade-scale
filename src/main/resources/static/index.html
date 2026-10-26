@@ -1,0 +1,522 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#302338" />
+    <meta
+      name="description"
+      content="A calm workspace for courses, weighted grades, and your next goal."
+    />
+    <title>Grade_scale — your course, in perspective</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" href="/workspace.css" />
+    <link rel="stylesheet" href="/responsive.css" />
+    <script src="/app.js" type="module"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to workspace</a>
+    <svg
+      class="icon-library"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <symbol id="i-grid" viewBox="0 0 24 24">
+          <rect x="3" y="3" width="7" height="7" rx="2" />
+          <rect x="14" y="3" width="7" height="7" rx="2" />
+          <rect x="3" y="14" width="7" height="7" rx="2" />
+          <rect x="14" y="14" width="7" height="7" rx="2" />
+        </symbol>
+        <symbol id="i-plus" viewBox="0 0 24 24">
+          <path d="M12 5v14M5 12h14" />
+        </symbol>
+        <symbol id="i-book" viewBox="0 0 24 24">
+          <path
+            d="M4 4h6a3 3 0 0 1 3 3v14a5 5 0 0 0-4-2H4zM20 4h-4a3 3 0 0 0-3 3v14a5 5 0 0 1 4-2h3z"
+          />
+        </symbol>
+        <symbol id="i-sliders" viewBox="0 0 24 24">
+          <path d="M4 6h9m4 0h3M4 12h3m4 0h9M4 18h9m4 0h3" />
+          <circle cx="15" cy="6" r="2" />
+          <circle cx="9" cy="12" r="2" />
+          <circle cx="15" cy="18" r="2" />
+        </symbol>
+        <symbol id="i-code" viewBox="0 0 24 24">
+          <path d="m7 7-5 5 5 5m10-10 5 5-5 5M14 4l-4 16" />
+        </symbol>
+        <symbol id="i-edit" viewBox="0 0 24 24">
+          <path d="m15 4 5 5M3 21l5-1L21 7a2 2 0 0 0-5-5L3 15z" />
+        </symbol>
+        <symbol id="i-trash" viewBox="0 0 24 24">
+          <path d="M3 6h18M9 6V3h6v3M5 6l1 15h12l1-15M10 10v7m4-7v7" />
+        </symbol>
+        <symbol id="i-chevron" viewBox="0 0 24 24">
+          <path d="m9 5 7 7-7 7" />
+        </symbol>
+        <symbol id="i-check" viewBox="0 0 24 24">
+          <path d="m5 12 4 4 10-10" />
+        </symbol>
+        <symbol id="i-download" viewBox="0 0 24 24">
+          <path d="M12 3v12m-5-5 5 5 5-5M5 16v5h14v-5" />
+        </symbol>
+        <symbol id="i-close" viewBox="0 0 24 24">
+          <path d="m6 6 12 12M6 18 18 6" />
+        </symbol>
+        <symbol id="i-spark" viewBox="0 0 24 24">
+          <path d="m12 2 2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5z" />
+        </symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24">
+          <rect x="5" y="10" width="14" height="11" rx="3" />
+          <path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v3" />
+        </symbol>
+      </defs>
+    </svg>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Workspace navigation">
+        <a class="brand" href="/" aria-label="Grade_scale home"
+          ><span class="brand-mark" aria-hidden="true"
+            ><i></i><i></i><i></i><i></i></span
+          ><span
+            >grade<span class="brand-light">_scale</span
+            ><small>A little clarity goes a long way.</small></span
+          ></a
+        >
+        <div class="semester-label">
+          <span class="status-dot"></span>Your study workspace
+        </div>
+        <nav class="primary-nav" aria-label="Main">
+          <a class="nav-link active" href="#workspace"
+            ><svg class="icon"><use href="#i-grid" /></svg>My courses<span
+              id="course-count"
+              class="nav-count"
+              >0</span
+            ></a
+          ><button class="nav-link" id="open-scale">
+            <svg class="icon"><use href="#i-sliders" /></svg>Grading scale</button
+          ><button class="nav-link" id="open-api">
+            <svg class="icon"><use href="#i-code" /></svg>API guide
+          </button>
+        </nav>
+        <div class="course-nav-heading">
+          <span>Your courses</span
+          ><button
+            class="icon-button"
+            id="new-course-side"
+            aria-label="Create a course"
+          >
+            <svg class="icon"><use href="#i-plus" /></svg>
+          </button>
+        </div>
+        <nav id="course-nav" class="course-nav" aria-label="Courses">
+          <p class="sidebar-hint">Your courses will appear here.</p>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="tiny-art" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+          <strong>Progress has a pattern.</strong>
+          <p>See yours, one assessment<br />at a time.</p>
+          <div class="privacy-note">
+            <svg class="icon"><use href="#i-lock" /></svg
+            ><span>Private to this browser</span>
+          </div>
+        </div>
+      </aside>
+      <main id="workspace" class="workspace" tabindex="-1">
+        <header class="topbar">
+          <div class="breadcrumb">
+            My courses <span>/</span>
+            <strong id="breadcrumb-course">Overview</strong>
+          </div>
+          <span class="workspace-tag"><span></span>Personal workspace</span>
+        </header>
+        <div
+          id="app-error"
+          class="banner error-banner"
+          role="alert"
+          hidden
+        ></div>
+        <section class="page-heading">
+          <div>
+            <p class="greeting">A little effort. A clearer picture.</p>
+            <h1>Your course, in perspective<span>.</span></h1>
+            <p class="page-description">
+              Keep your assessments together. Know where you stand.
+            </p>
+          </div>
+          <button id="new-course" class="button button-primary">
+            <svg class="icon"><use href="#i-plus" /></svg>New course
+          </button>
+        </section>
+        <div id="preview-note" class="preview-note" hidden>
+          <span class="preview-bullet"></span
+          ><span
+            >Local preview. Courses reset when the app restarts and expire after
+            24 hours.</span
+          >
+        </div>
+        <section id="empty-state" class="empty-state" hidden>
+          <div class="empty-illustration" aria-hidden="true">
+            <span class="paper-line"></span><span class="paper-line"></span
+            ><span class="paper-line"></span><b>A<span>+</span></b>
+          </div>
+          <h2>Start with one course.</h2>
+          <p>
+            Add your assessments and their weights.<br />We’ll make the numbers
+            feel a little simpler.
+          </p>
+          <div class="empty-actions">
+            <button class="button button-primary" id="first-course">
+              <svg class="icon"><use href="#i-plus" /></svg>Create a course</button
+            ><button class="button button-secondary" id="load-example">
+              Try an example
+            </button>
+          </div>
+          <span class="empty-caption">No sign-up. Just your next step.</span>
+        </section>
+        <div id="course-workspace" hidden>
+          <section class="course-heading">
+            <div class="course-identity">
+              <div class="course-symbol">
+                <svg class="icon"><use href="#i-book" /></svg>
+              </div>
+              <div>
+                <div class="course-code" id="course-code"></div>
+                <h2 id="course-title"></h2>
+              </div>
+            </div>
+            <div class="course-actions">
+              <button class="button button-quiet" id="export-course">
+                <svg class="icon" aria-hidden="true">
+                  <use href="#i-download" /></svg
+                >Export course
+              </button>
+              <button class="button button-quiet" id="rename-course">
+                <svg class="icon"><use href="#i-edit" /></svg>Edit course</button
+              ><button
+                class="icon-button delete-course-button"
+                id="delete-course"
+                aria-label="Delete course"
+              >
+                <svg class="icon"><use href="#i-trash" /></svg>
+              </button>
+            </div>
+          </section>
+          <div class="main-grid">
+            <section
+              class="assessment-panel"
+              aria-labelledby="assessment-heading"
+            >
+              <div class="section-heading">
+                <div>
+                  <h3 id="assessment-heading">The building blocks</h3>
+                  <p>Your assessments and what they’re worth.</p>
+                </div>
+                <span class="count-label" id="assessment-count"
+                  >0 assessments</span
+                >
+              </div>
+              <div class="assessment-table-wrap">
+                <table class="assessment-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Assessment</th>
+                      <th scope="col">Score</th>
+                      <th scope="col">Weight</th>
+                      <th scope="col"><span class="sr-only">Actions</span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="assessment-rows"></tbody>
+                </table>
+                <div id="no-assessments" class="no-assessments" hidden>
+                  <svg class="icon"><use href="#i-book" /></svg>
+                  <p>
+                    No assessments yet.<br /><span
+                      >Add your first result below.</span
+                    >
+                  </p>
+                </div>
+              </div>
+              <button id="add-assessment" class="add-assessment">
+                <span
+                  ><svg class="icon"><use href="#i-plus" /></svg>Add
+                  assessment</span
+                ><span class="key-hint">Up to 20</span>
+              </button>
+              <div class="weight-summary">
+                <div class="weight-summary-heading">
+                  <span>Course weight accounted for</span
+                  ><strong id="weight-total">0 / 100%</strong>
+                </div>
+                <div
+                  class="weight-track"
+                  id="weight-track"
+                  role="img"
+                  aria-label="Assessment weights"
+                ></div>
+                <div class="weight-legend">
+                  <span id="weight-complete-label"><i></i>Graded</span
+                  ><span id="remaining-label">100% still to come</span>
+                </div>
+              </div>
+              <div class="formula-note">
+                <svg class="icon"><use href="#i-spark" /></svg>
+                <p id="formula-note">
+                  Each score × its weight. A clear view of your progress.
+                </p>
+              </div>
+            </section>
+            <aside class="result-panel" aria-labelledby="result-heading">
+              <div class="result-heading">
+                <h3 id="result-heading">Your current standing</h3>
+                <span id="result-status" class="result-status"
+                  >In progress</span
+                >
+              </div>
+              <div class="grade-instrument">
+                <svg
+                  id="grade-dial"
+                  class="grade-dial"
+                  viewBox="0 0 320 280"
+                  aria-hidden="true"
+                >
+                  <g id="dial-ticks"></g>
+                  <path
+                    class="dial-track"
+                    d="M 68.1 231.9 A 130 130 0 1 1 251.9 231.9"
+                    pathLength="100"
+                  />
+                  <path
+                    id="dial-value"
+                    class="dial-value"
+                    d="M 68.1 231.9 A 130 130 0 1 1 251.9 231.9"
+                    pathLength="100"
+                    stroke-dasharray="0 100"
+                  />
+                  <text x="45" y="258">0</text>
+                  <text x="255" y="258">100</text>
+                </svg>
+                <div class="grade-center">
+                  <span class="grade-letter" id="grade-letter">—</span>
+                  <div class="grade-score">
+                    <strong id="grade-score">—</strong><span>%</span>
+                  </div>
+                  <span id="grade-caption">Awaiting your first result</span>
+                </div>
+              </div>
+              <div class="result-footer">
+                <div>
+                  <span>Earned so far</span
+                  ><strong id="earned-points">0 <small>pts</small></strong>
+                </div>
+                <span class="result-footer-divider"></span>
+                <div>
+                  <span>Still ahead</span
+                  ><strong id="remaining-points">100 <small>%</small></strong>
+                </div>
+              </div>
+              <p id="provisional-note" class="provisional-note">
+                Your current average uses graded work only.
+              </p>
+            </aside>
+          </div>
+          <section class="lower-grid">
+            <div class="target-panel">
+              <div class="target-copy">
+                <span class="target-icon"
+                  ><svg class="icon"><use href="#i-spark" /></svg
+                ></span>
+                <div>
+                  <h3>Aim for your next milestone.</h3>
+                  <p>Find the average you need on your remaining work.</p>
+                </div>
+              </div>
+              <form id="target-form" class="target-form">
+                <label for="target-score">Target grade</label>
+                <div class="target-input-group">
+                  <input
+                    id="target-score"
+                    name="target"
+                    type="number"
+                    inputmode="decimal"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    value="90"
+                    required
+                  /><span>%</span>
+                </div>
+                <button class="button button-dark" type="submit">
+                  Find out<svg class="icon"><use href="#i-chevron" /></svg>
+                </button>
+              </form>
+              <p
+                id="target-result"
+                class="target-result"
+                role="status"
+                hidden
+              ></p>
+            </div>
+            <div class="scale-panel">
+              <div>
+                <h3>A scale you can see.</h3>
+                <button id="scale-details" class="text-button">
+                  How it works
+                </button>
+              </div>
+              <div class="scale-bands" aria-label="Grading scale"></div>
+              <p>A simple reference scale. Check your course syllabus.</p>
+            </div>
+          </section>
+        </div>
+        <footer class="main-footer">
+          <span>Small steps. Measurable progress.</span
+          ><span
+            >Grade_scale
+            <span class="footer-flower" aria-hidden="true">✳</span> Built to
+            make sense.</span
+          >
+        </footer>
+      </main>
+    </div>
+    <dialog id="course-dialog" class="form-dialog">
+      <form id="course-form" autocomplete="off">
+        <div class="dialog-heading">
+          <div>
+            <p>Your workspace</p>
+            <h2 id="course-dialog-title">A new beginning.</h2>
+          </div>
+          <button
+            class="icon-button close-dialog"
+            type="button"
+            aria-label="Close"
+          >
+            <svg class="icon"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <label for="course-name-input">Course name</label
+        ><input
+          id="course-name-input"
+          name="name"
+          maxlength="80"
+          placeholder="e.g. Software Engineering"
+          required
+        /><label for="course-code-input"
+          >Course code <span>(optional)</span></label
+        ><input
+          id="course-code-input"
+          name="code"
+          spellcheck="false"
+          maxlength="20"
+          placeholder="e.g. CS 240"
+        />
+        <p class="dialog-error" id="course-error" role="alert" hidden></p>
+        <button class="button button-primary dialog-submit" type="submit">
+          Create course
+        </button>
+      </form>
+    </dialog>
+    <dialog id="assessment-dialog" class="form-dialog">
+      <form id="assessment-form" autocomplete="off">
+        <div class="dialog-heading">
+          <div>
+            <p>One piece of the bigger picture</p>
+            <h2 id="assessment-dialog-title">Add an assessment.</h2>
+          </div>
+          <button
+            class="icon-button close-dialog"
+            type="button"
+            aria-label="Close"
+          >
+            <svg class="icon"><use href="#i-close" /></svg>
+          </button>
+        </div>
+        <label for="assessment-name">Assessment name</label
+        ><input
+          id="assessment-name"
+          name="name"
+          maxlength="60"
+          placeholder="e.g. Midterm exam"
+          required
+        />
+        <div class="form-columns">
+          <div>
+            <label for="assessment-score">Score <span>(%)</span></label
+            ><input
+              id="assessment-score"
+              name="score"
+              type="number"
+              inputmode="decimal"
+              min="0"
+              max="100"
+              step="0.01"
+              placeholder="85"
+              required
+            />
+          </div>
+          <div>
+            <label for="assessment-weight">Weight <span>(%)</span></label
+            ><input
+              id="assessment-weight"
+              name="weight"
+              type="number"
+              inputmode="decimal"
+              min="0.01"
+              max="100"
+              step="0.01"
+              placeholder="30"
+              required
+            />
+          </div>
+        </div>
+        <p class="form-hint" id="assessment-hint">
+          Enter your percentage score, not raw marks.
+        </p>
+        <p class="dialog-error" id="assessment-error" role="alert" hidden></p>
+        <button class="button button-primary dialog-submit" type="submit">
+          Save assessment
+        </button>
+      </form>
+    </dialog>
+    <dialog id="confirm-dialog" class="form-dialog confirm-dialog">
+      <div class="dialog-heading">
+        <h2 id="confirm-heading">Remove this assessment?</h2>
+        <button
+          class="icon-button close-dialog"
+          type="button"
+          aria-label="Close"
+        >
+          <svg class="icon"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <p id="confirm-description">
+        Your grade will be recalculated. This cannot be undone.
+      </p>
+      <div class="confirm-actions">
+        <button class="button button-secondary close-dialog">Keep it</button
+        ><button id="confirm-delete" class="button button-danger">
+          Remove assessment
+        </button>
+      </div>
+      <p class="dialog-error" id="confirm-error" role="alert" hidden></p>
+    </dialog>
+    <dialog id="info-dialog" class="info-dialog">
+      <div class="dialog-heading">
+        <h2 id="info-title">The grading scale</h2>
+        <button
+          class="icon-button close-dialog"
+          type="button"
+          aria-label="Close"
+        >
+          <svg class="icon"><use href="#i-close" /></svg>
+        </button>
+      </div>
+      <div id="info-content"></div>
+    </dialog>
+    <div id="toast" class="toast" role="status" hidden>
+      <svg class="icon"><use href="#i-check" /></svg><span></span>
+    </div>
+  </body>
+</html>

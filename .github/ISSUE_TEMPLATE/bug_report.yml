@@ -1,0 +1,32 @@
+name: Bug report
+description: Describe a reproducible problem in Grade_scale.
+body:
+  - type: dropdown
+    id: storage
+    attributes:
+      label: Storage mode
+      options: [Native preview, MySQL with Docker, Existing MySQL server]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Use fictional course names and scores.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Java version, operating system, and browser
+  - type: textarea
+    id: details
+    attributes:
+      label: Relevant errors
+      description: Remove cookies, CSRF tokens, credentials, and personal information.
