@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 const browser = await chromium.launch({
@@ -26,6 +26,19 @@ try {
     .getByRole("button", { name: "Try an example", exact: true })
     .click();
   await waitText("#grade-score", "90.13");
+  await waitText("#grade-letter", "A-");
+  const downloadEvent = page.waitForEvent("download");
+  await page
+    .getByRole("button", { name: "Export course", exact: true })
+    .click();
+  const download = await downloadEvent;
+  const exported = JSON.parse(await readFile(await download.path(), "utf8"));
+  assert.equal(exported.format, "grade-scale-course");
+  assert.equal(exported.assessments.length, 3);
+  assert.equal(exported.result.letterGrade, "A-");
+  assert.equal("owner" in exported.course, false);
+  assert.equal("csrfToken" in exported, false);
+
   await page.getByRole("button", { name: "Find out", exact: true }).click();
   await waitText("#target-result", "89.6%");
   await page
@@ -87,8 +100,25 @@ try {
     .getByRole("button", { name: "Close", exact: true })
     .click();
   await page.keyboard.press("Escape");
+
+  await page.getByRole("button", { name: "New course", exact: true }).click();
+  await page.getByLabel("Course name", { exact: true }).fill("Another course");
+  await page
+    .getByLabel("Course code (optional)", { exact: true })
+    .fill("CS 250");
+  await page
+    .getByRole("button", { name: "Create course", exact: true })
+    .click();
+  await page
+    .getByRole("heading", { name: "Another course", exact: true })
+    .waitFor();
+  await page
+    .getByRole("button", { name: "Open Software Engineering", exact: true })
+    .click();
+  await waitText("#grade-score", "90.13");
   await page.reload();
   await waitText("#grade-score", "90.13");
+  await page.evaluate(() => window.scrollTo(0, 0));
   await mkdir("docs/screenshots", { recursive: true });
   await page.screenshot({
     path: "docs/screenshots/desktop.png",
