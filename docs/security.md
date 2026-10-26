@@ -37,3 +37,14 @@ The initial schema is idempotent (`CREATE TABLE IF NOT EXISTS`), not a migration
 history. Use reviewed Liquibase SQL changes before changing an existing schema.
 Dependency checks detect known advisories, not every vulnerability. This document
 describes concrete controls and limitations; it is not a security certification.
+
+## Repository checks
+
+GitHub Actions references are pinned to official commit hashes. Dependabot tracks
+Maven, npm, Actions and Docker updates. The CI audit uses npm's lockfile audit and
+OSV queries for the resolved Maven runtime/test coordinates. Build plugins and base
+images still need their own upgrade review; no advisory scan proves all code safe.
+
+The JSON export contains only the displayed course, assessments, result and grading
+scale. It omits session cookies, CSRF tokens and internal owner hashes. Keep downloaded
+course files private when they contain information you want to retain locally.
