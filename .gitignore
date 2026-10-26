@@ -1,0 +1,14 @@
+target/
+.env
+.env.*
+!.env.example
+node_modules/
+.DS_Store
+*.log
+.local/
+.idea/
+.vscode/settings.json
+*.pem
+*.key
+
+.local-work/
