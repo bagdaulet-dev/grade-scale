@@ -71,8 +71,10 @@ public class MysqlCourseRepository implements CourseRepository {
   public CourseDetail create(String owner, CourseInput input) {
     return transactions.execute(
         tx -> {
+          // A duplicate-key update takes an exclusive lock immediately. INSERT IGNORE
+          // takes a shared duplicate-key lock, which can deadlock during a later upgrade.
           jdbc.update(
-              "INSERT IGNORE INTO workspaces(owner,expires_at) VALUES(?,?)",
+              "INSERT INTO workspaces(owner,expires_at) VALUES(?,?) ON DUPLICATE KEY UPDATE owner=owner",
               owner,
               Timestamp.from(Instant.now().plus(Duration.ofHours(24))));
           jdbc.queryForObject(
