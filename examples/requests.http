@@ -1,0 +1,39 @@
+# Open in an HTTP client that supports .http files and cookie persistence.
+# Replace token and IDs with the values returned by your own session.
+@base = http://localhost:8081/api
+@csrf = paste-session-csrf-token-here
+@courseId = paste-course-id-here
+@assessmentId = paste-assessment-id-here
+
+### Obtain a session cookie and CSRF token
+GET {{base}}/session
+
+### Read the single source of grading boundaries
+GET {{base}}/scale
+
+### Create a course
+POST {{base}}/courses
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf}}
+
+{"name":"Software Engineering","code":"CS 240"}
+
+### Add graded work
+POST {{base}}/courses/{{courseId}}/assessments
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf}}
+
+{"name":"Assignments","score":80,"weight":40}
+
+### Correct one score
+PATCH {{base}}/assessments/{{assessmentId}}
+Content-Type: application/json
+X-CSRF-TOKEN: {{csrf}}
+
+{"score":85}
+
+### Inspect the provisional result
+GET {{base}}/courses/{{courseId}}/result
+
+### Plan the remaining course weight
+GET {{base}}/courses/{{courseId}}/target?score=90
