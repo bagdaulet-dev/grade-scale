@@ -1,0 +1,15 @@
+{
+  "name": "grade-scale-tools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Development-only formatting and browser checks for Grade_scale",
+  "scripts": {
+    "format": "prettier --write src/main/resources/static/*.{html,css,js} docs/*.md README.md package.json scripts/*.mjs .github/workflows/*.yml",
+    "format:check": "prettier --check src/main/resources/static/*.{html,css,js} docs/*.md README.md package.json scripts/*.mjs .github/workflows/*.yml",
+    "test:browser": "node scripts/browser-smoke.mjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1",
+    "prettier": "3.9.10"
+  }
+}
