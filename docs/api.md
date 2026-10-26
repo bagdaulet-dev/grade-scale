@@ -1,5 +1,8 @@
 # API contract
 
+Import [openapi.json](openapi.json) into an OpenAPI-compatible client, or use the
+[ordered HTTP examples](../examples/requests.http).
+
 Base URL: `http://localhost:8081/api`. Responses are JSON. Mutation bodies must
 use `Content-Type: application/json`; keep bodies below 16 KB. Course IDs and
 assessment IDs are UUIDs. There are no accounts: your cookie identifies a private
@@ -87,7 +90,7 @@ the specified total weight, with the same score range of 0–100.
 ```
 
 400 means malformed input, 403 a missing/expired CSRF token, 404 a missing or
-foreign-owned resource, 405 an unsupported method, 413 an oversized body, 415 an
+foreign-owned resource, 405 an unsupported method (with an Allow header), 406 an unsupported response format, 413 an oversized body, 415 an
 unsupported content type, 422 invalid fields/weights, 429 rate limiting, and 503
 a temporary service issue. Error bodies do not include SQL or stack traces.
 
@@ -102,3 +105,8 @@ The grading scale is returned by `GET /api/scale`: A ≥95, A- ≥90, B+ ≥85,
 B ≥80, B- ≥75, C+ ≥70, C ≥65, C- ≥60, D+ ≥55, D ≥50, F below 50.
 Lower bounds are inclusive; the next higher band starts at its own lower bound.
 The interface reads these exact boundaries from the backend.
+
+Course and assessment names reject control characters as well as blank values.
+The interface can export the visible course detail and grade scale to a JSON file;
+exports contain no cookies, CSRF tokens or owner identifiers. Export is a local
+download and does not create another server-side record.
