@@ -28,3 +28,15 @@ Screenshots are regenerated under `docs/screenshots/`.
 For a regression, first make the focused test fail on the old behavior, fix the
 cause, then run the relevant suite. Test outcomes are recorded in
 [verification.md](verification.md). CI uses Java 21 and MySQL 8.4.
+
+CI runs a clean preview test pass, then a MySQL pass without deleting JaCoCo execution
+data. This produces combined coverage for the two repository implementations.
+The current suite has 58 TestNG cases including parameterized boundaries; preview
+mode skips the MySQL-only restart/expiry case. MySQL mode runs all 58 cases.
+Coverage reports are at `target/site/jacoco/index.html` and in the GitHub verification
+artifact. Tests have bounded HTTP waits and close their clients after each class.
+
+`python3 scripts/check-openapi.py` compares all 13 controller operations with the
+OpenAPI document and resolves internal references. It checks contract drift; it is
+not a full OpenAPI semantic validator. `python3 scripts/audit-maven.py` audits the
+resolved public dependency coordinates against OSV and writes a report under target.
