@@ -1,0 +1,65 @@
+name: Verify Grade_scale
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    services:
+      mysql:
+        image: mysql:8.4
+        env:
+          MYSQL_ROOT_PASSWORD: ci-root-password
+          MYSQL_DATABASE: grade_scale
+          MYSQL_USER: grade_scale
+          MYSQL_PASSWORD: ci-grade-scale-password
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 --silent"
+          --health-interval=5s --health-timeout=3s --health-retries=30
+    env:
+      MYSQL_HOST: 127.0.0.1
+      MYSQL_DATABASE: grade_scale
+      MYSQL_USER: grade_scale
+      MYSQL_PASSWORD: ci-grade-scale-password
+      TEST_STORAGE: mysql
+      BROWSER_CHANNEL: chrome
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+      - run: ./mvnw -B -ntp fmt:check verify
+      - run: npm ci --ignore-scripts
+      - run: npm audit
+      - run: npm run format:check
+      - run: node --check src/main/resources/static/app.js
+      - name: Start the application with MySQL
+        run: |
+          java -Xms32m -Xmx192m -jar target/grade-scale.jar --spring.profiles.active=mysql > /tmp/grade-scale.log 2>&1 &
+          for attempt in $(seq 1 40); do
+            if curl -fsS http://localhost:8081/api/health; then exit 0; fi
+            sleep 2
+          done
+          cat /tmp/grade-scale.log
+          exit 1
+      - run: npm run test:browser
+      - name: Build the container
+        run: docker build -t grade-scale:ci .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification
+          path: |
+            target/surefire-reports
+            docs/screenshots
