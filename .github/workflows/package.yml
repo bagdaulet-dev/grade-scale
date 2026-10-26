@@ -1,0 +1,19 @@
+name: Export Docker image manually
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  export:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and export image
+        run: |
+          docker build -t grade-scale:${{ github.sha }} .
+          docker save grade-scale:${{ github.sha }} | gzip > grade-scale-image.tar.gz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: grade-scale-docker-image
+          path: grade-scale-image.tar.gz
+          retention-days: 7
