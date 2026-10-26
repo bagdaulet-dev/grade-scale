@@ -12,12 +12,13 @@ public final class Models {
   public record Course(UUID id, String name, String code, Instant createdAt) {}
 
   public record CourseInput(
-      @NotBlank @Size(max = 80) String name, @NotNull @Size(max = 20) String code) {}
+      @NotBlank @Size(max = 80) @Pattern(regexp = "[^\\p{Cntrl}]*") String name,
+      @NotNull @Size(max = 20) @Pattern(regexp = "[^\\p{Cntrl}]*") String code) {}
 
   public record Assessment(UUID id, String name, BigDecimal score, BigDecimal weight) {}
 
   public record AssessmentInput(
-      @NotBlank @Size(max = 60) String name,
+      @NotBlank @Size(max = 60) @Pattern(regexp = "[^\\p{Cntrl}]*") String name,
       @NotNull @DecimalMin("0") @DecimalMax("100") @Digits(integer = 3, fraction = 2)
           BigDecimal score,
       @NotNull
@@ -27,7 +28,7 @@ public final class Models {
           BigDecimal weight) {}
 
   public record AssessmentPatch(
-      @Size(min = 1, max = 60) String name,
+      @Size(min = 1, max = 60) @Pattern(regexp = "[^\\p{Cntrl}]*") String name,
       @DecimalMin("0") @DecimalMax("100") @Digits(integer = 3, fraction = 2) BigDecimal score,
       @DecimalMin(value = "0", inclusive = false)
           @DecimalMax("100")
