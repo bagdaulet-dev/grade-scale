@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "playwright": "1.62.1",
-    "prettier": "3.9.10"
+    "prettier": "3.10.1"
   },
   "type": "module"
 }
